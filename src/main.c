@@ -6,9 +6,8 @@ int main(int argc, char *argv[])
 	while(1) {
 		/* do nothing */
 	}
-    return 0;
+	return 0;
 }
-
 
 static inline void init_bss(void)
 {
