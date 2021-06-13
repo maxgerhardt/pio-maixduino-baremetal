@@ -21,20 +21,20 @@ static inline void init_bss(void)
         *dst++ = 0;
 }
 
-void _init_bsp(int core_id, int number_of_cores)
-{
-    extern int main(int argc, char *argv[]);
-    extern void __libc_init_array(void);
-    extern void __libc_fini_array(void);
+	void _init_bsp(int core_id, int number_of_cores)
+	{
+	extern int main(int argc, char *argv[]);
+	extern void __libc_init_array(void);
+	extern void __libc_fini_array(void);
 	int ret = 0;
 	if(core_id == 0)
-    {
-        /* Initialize bss data to 0 */
-        init_bss();
-        /* Register finalization function */
-        atexit(__libc_fini_array);
-        /* Init libc array for C++ */
-        __libc_init_array();
+	{
+		/* Initialize bss data to 0 */
+		init_bss();
+		/* Register finalization function */
+		atexit(__libc_fini_array);
+		/* Init libc array for C++ */
+		__libc_init_array();
 		/* more stuff to init.. */
 		/* call into main */
 		ret = main(0, NULL);
@@ -43,9 +43,9 @@ void _init_bsp(int core_id, int number_of_cores)
 		/* other core entry.. */
 		ret = -1;
 	}
-	
+
 	exit(ret);
-}
+	}
 
 
 uintptr_t handle_syscall(uintptr_t cause, uintptr_t epc, uintptr_t regs[32], uintptr_t fregs[32])
